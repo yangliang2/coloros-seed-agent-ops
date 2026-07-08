@@ -1,0 +1,44 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "media",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "疑似 media 模块在处理「蓝牙耳机断开后音频仍从外放泄漏」相关状态更新时未正确刷新/回收资源",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-MED-006",
+      "reason": "命中目标仓历史缺陷 HIST-MED-053: 路径命中 frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;文本 token 重合 8 个"
+    },
+    "confidence": 0.82,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp",
+        "note": "疑似相关代码路径"
+      },
+      {
+        "kind": "log_line",
+        "ref": "复现路径: frameworks/av/services/audiopolicy/service/AudioPolicy",
+        "note": "缺陷描述关键行"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-MED-053",
+        "note": "蓝牙断开后音频焦点仍在耳机场景(路径命中 frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;文本 token 重合 8 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-MED-006",
+        "note": "蓝牙耳机切换后外放仍有声音(路径命中 frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;文本 token 重合 7 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-MED-021",
+        "note": "连接耳机后仍短暂外放(路径命中 frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;文本 token 重合 7 个)"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
