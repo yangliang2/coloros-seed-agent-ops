@@ -1,0 +1,49 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "疑似 settings 模块在处理「ColorOS Settings 首页 Android.bp 集成后滑动卡顿二次验证」相关状态更新时未正确刷新/回收资源",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SET-001",
+      "reason": "命中目标仓历史缺陷 HIST-SET-001: 显式引用历史缺陷 HIST-SET-001;路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 12 个"
+    },
+    "confidence": 0.82,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "疑似相关代码路径"
+      },
+      {
+        "kind": "log_line",
+        "ref": "复现路径: packages/apps/Settings/src/com/android/settings/homepa",
+        "note": "缺陷描述关键行"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "yangliang2/coloros-seed#9002",
+        "note": "ColorOS Settings 首页 Android.bp 集成后滑动卡顿"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "设置首页滑动卡顿(显式引用历史缺陷 HIST-SET-001;路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 12 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-014",
+        "note": "设置列表快速滑动掉帧(显式引用重复主缺陷 HIST-SET-001;路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 10 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-051",
+        "note": "设置首页 TopLevelSettings 滑动卡顿(显式引用重复主缺陷 HIST-SET-001;路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 11 个)"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
