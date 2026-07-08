@@ -1,0 +1,44 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "camera",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "疑似 camera 模块在处理「Camera2 预览首帧黑屏」相关状态更新时未正确刷新/回收资源",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-CAM-010",
+      "reason": "命中目标仓历史缺陷 HIST-CAM-052: 显式引用历史缺陷 HIST-CAM-052;显式引用重复主缺陷 HIST-CAM-010;路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt;文本 token 重合 6 个"
+    },
+    "confidence": 0.82,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt",
+        "note": "疑似相关代码路径"
+      },
+      {
+        "kind": "log_line",
+        "ref": "复现路径: packages/apps/Camera2/src/com/android/camera/preview/P",
+        "note": "缺陷描述关键行"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-CAM-052",
+        "note": "相机从后台恢复后预览黑屏(显式引用历史缺陷 HIST-CAM-052;显式引用重复主缺陷 HIST-CAM-010;路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt;文本 token 重合 6 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-CAM-010",
+        "note": "相机预览首帧黑屏(显式引用历史缺陷 HIST-CAM-010;路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt;文本 token 重合 10 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-CAM-027",
+        "note": "相机预览黑屏数秒(显式引用重复主缺陷 HIST-CAM-010;路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt;文本 token 重合 5 个)"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
