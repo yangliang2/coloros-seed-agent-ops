@@ -1,0 +1,74 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "疑似 settings 模块阻塞 com.android.settings 主线程,需优先检查 main thread stack 与 binder/wait 信号",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SET-001",
+      "reason": "命中目标仓历史缺陷 HIST-SET-051: 显式引用历史缺陷 HIST-SET-051;显式引用重复主缺陷 HIST-SET-001;文本 token 重合 9 个"
+    },
+    "confidence": 0.82,
+    "evidenceRefs": [
+      {
+        "kind": "log_line",
+        "ref": "main tid=1 Native",
+        "note": "main thread stack 顶帧"
+      },
+      {
+        "kind": "log_line",
+        "ref": "binder transaction to system_server blocked for 4800ms",
+        "note": "binder/wait 信号"
+      },
+      {
+        "kind": "log_line",
+        "ref": "am_anr: [0,com.android.settings,953695301,Input dispatching timed out]",
+        "note": "event log marker"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "疑似相关代码路径"
+      },
+      {
+        "kind": "log_line",
+        "ref": "Android ANR triage: 设置首页快速滑动后输入无响应,请结合 HIST-SET-001 / HIST-S",
+        "note": "缺陷描述关键行"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "yangliang2/coloros-seed#9101",
+        "note": "ColorOS Settings 首页 Android.bp 集成后滑动卡顿"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "yangliang2/coloros-seed#9003",
+        "note": "ColorOS Settings 首页 Android.bp 集成后滑动卡顿二次验证"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "yangliang2/coloros-seed#9002",
+        "note": "ColorOS Settings 首页 Android.bp 集成后滑动卡顿"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-051",
+        "note": "设置首页 TopLevelSettings 滑动卡顿(显式引用历史缺陷 HIST-SET-051;显式引用重复主缺陷 HIST-SET-001;文本 token 重合 9 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "设置首页滑动卡顿(显式引用历史缺陷 HIST-SET-001;文本 token 重合 9 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-014",
+        "note": "设置列表快速滑动掉帧(显式引用重复主缺陷 HIST-SET-001;文本 token 重合 9 个)"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
