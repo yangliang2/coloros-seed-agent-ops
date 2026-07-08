@@ -1,0 +1,58 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "framework",
+    "suggestedOwner": "yangliang2",
+    "priority": "P0",
+    "suspectedRootCause": "疑似 framework 模块阻塞 system_server 主线程,需优先检查 main thread stack 与 binder/wait 信号",
+    "duplicate": {
+      "isDuplicate": false,
+      "reason": "未在历史相似缺陷中发现同因项"
+    },
+    "confidence": 0.72,
+    "evidenceRefs": [
+      {
+        "kind": "log_line",
+        "ref": "main tid=1 Waiting",
+        "note": "main thread stack 顶帧"
+      },
+      {
+        "kind": "log_line",
+        "ref": "binder thread pool saturated: system_server waiting on package install lock",
+        "note": "binder/wait 信号"
+      },
+      {
+        "kind": "log_line",
+        "ref": "am_anr: [1000,system_server,953695302,Broadcast of PACKAGE_ADDED timed out]",
+        "note": "event log marker"
+      },
+      {
+        "kind": "code_path",
+        "ref": "frameworks/base/services/core/java/com/android/server/wm/ActivityTaskManagerService.java",
+        "note": "疑似相关代码路径"
+      },
+      {
+        "kind": "log_line",
+        "ref": "Android ANR triage: 安装应用后前台服务通知长时间无响应,请结合 framework 历史缺陷判断优先",
+        "note": "缺陷描述关键行"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "yangliang2/coloros-seed#9105",
+        "note": "SystemUI 下拉通知栏触发 NullPointerException"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-FWK-022",
+        "note": "后台服务重启后前台通知丢失(文本 token 重合 7 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-FWK-009",
+        "note": "安装应用后桌面图标延迟出现(文本 token 重合 4 个)"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
