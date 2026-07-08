@@ -1,0 +1,54 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "systemui",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "疑似 systemui 模块触发 com.android.systemui 崩溃,需优先检查 crash stack 顶帧附近的空指针/状态竞态",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SYS-042",
+      "reason": "命中目标仓历史缺陷 HIST-SYS-069: 显式引用历史缺陷 HIST-SYS-069;显式引用重复主缺陷 HIST-SYS-042;文本 token 重合 4 个"
+    },
+    "confidence": 0.82,
+    "evidenceRefs": [
+      {
+        "kind": "log_line",
+        "ref": "java.lang.NullPointerException: Attempt to invoke virtual method on null notification row",
+        "note": "crash stack 顶帧"
+      },
+      {
+        "kind": "log_line",
+        "ref": "FATAL EXCEPTION: main Process: com.android.systemui",
+        "note": "关键日志"
+      },
+      {
+        "kind": "code_path",
+        "ref": "frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/CentralSurfacesImpl.kt",
+        "note": "疑似相关代码路径"
+      },
+      {
+        "kind": "log_line",
+        "ref": "Android crash-log triage: 下拉通知栏展开期间 SystemUI 进程崩溃,请结合 HIST-S",
+        "note": "缺陷描述关键行"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SYS-069",
+        "note": "CentralSurfaces 展开通知栏后卡死(显式引用历史缺陷 HIST-SYS-069;显式引用重复主缺陷 HIST-SYS-042;文本 token 重合 4 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SYS-042",
+        "note": "横屏下通知栏展开动画抖动(显式引用历史缺陷 HIST-SYS-042;文本 token 重合 6 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SYS-008",
+        "note": "通知栏下拉亮度条拖动无效(文本 token 重合 4 个)"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
