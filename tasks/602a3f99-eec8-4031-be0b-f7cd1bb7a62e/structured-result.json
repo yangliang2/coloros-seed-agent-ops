@@ -1,0 +1,54 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "camera",
+    "suggestedOwner": "yangliang2",
+    "priority": "P3",
+    "suspectedRootCause": "CtsCameraTestCases#testPreviewStability 被归类为 environment_issue: 失败历史和日志显示设备/实验室/基础设施信号",
+    "duplicate": {
+      "isDuplicate": false,
+      "reason": "未命中已知重复测试失败"
+    },
+    "confidence": 0.76,
+    "evidenceRefs": [
+      {
+        "kind": "log_line",
+        "ref": "Tradefed: device offline while collecting camera preview frames",
+        "note": "失败日志首个关键行"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt",
+        "note": "近期改动或 owner 规则路径"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt",
+        "note": "No camera preview code touched in suspect window"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-CAM-010",
+        "note": "相机预览首帧黑屏(路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-CAM-027",
+        "note": "相机预览黑屏数秒(路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-CAM-044",
+        "note": "扫码入口连续打开后预览冻结(路径命中 packages/apps/Camera2/src/com/android/camera/preview/PreviewPipeline.kt)"
+      }
+    ],
+    "procedureOutcome": {
+      "kind": "flaky_test_triage",
+      "classification": "environment_issue",
+      "failurePattern": "environmental",
+      "historySummary": "3 次历史: failed=0, passed=1, infra=2"
+    }
+  },
+  "failureClass": null,
+  "failureReason": null
+}
