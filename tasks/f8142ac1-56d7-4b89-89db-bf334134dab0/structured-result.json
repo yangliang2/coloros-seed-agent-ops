@@ -1,0 +1,39 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "systemui",
+    "suggestedOwner": "yangliang2",
+    "priority": "P2",
+    "suspectedRootCause": "SystemUITests#testShadeExpansion 被归类为 test_issue: 同一测试在相近构建中有通过也有失败,更像测试不稳定或时序依赖",
+    "duplicate": {
+      "isDuplicate": false,
+      "reason": "未命中已知重复测试失败"
+    },
+    "confidence": 0.72,
+    "evidenceRefs": [
+      {
+        "kind": "log_line",
+        "ref": "java.lang.AssertionError: shade expansion did not reach STATE_OPEN within 3000ms",
+        "note": "失败日志首个关键行"
+      },
+      {
+        "kind": "code_path",
+        "ref": "frameworks/base/packages/SystemUI/src/com/android/systemui/shade/NotificationPanelViewController.kt",
+        "note": "近期改动或 owner 规则路径"
+      },
+      {
+        "kind": "code_path",
+        "ref": "frameworks/base/packages/SystemUI/src/com/android/systemui/shade/NotificationPanelViewController.kt",
+        "note": "Animation duration adjusted for foldable shade transition"
+      }
+    ],
+    "procedureOutcome": {
+      "kind": "flaky_test_triage",
+      "classification": "test_issue",
+      "failurePattern": "flaky",
+      "historySummary": "4 次历史: failed=2, passed=2, infra=0"
+    }
+  },
+  "failureClass": null,
+  "failureReason": null
+}
