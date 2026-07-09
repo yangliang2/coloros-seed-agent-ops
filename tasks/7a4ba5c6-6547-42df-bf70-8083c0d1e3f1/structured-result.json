@@ -1,0 +1,54 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "SettingsRoboTests#testDashboardRefresh 被归类为 code_issue: 失败在历史中稳定复现且有相关代码改动",
+    "duplicate": {
+      "isDuplicate": false,
+      "reason": "未命中已知重复测试失败"
+    },
+    "confidence": 0.72,
+    "evidenceRefs": [
+      {
+        "kind": "log_line",
+        "ref": "java.lang.AssertionError: expected dashboard tile count <8> but was <7>",
+        "note": "失败日志首个关键行"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "近期改动或 owner 规则路径"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "Dashboard refresh moved behind lazy tile cache"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-051",
+        "note": "设置首页 TopLevelSettings 滑动卡顿(路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 3 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "设置首页滑动卡顿(路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 2 个)"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-014",
+        "note": "设置列表快速滑动掉帧(路径命中 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt;文本 token 重合 2 个)"
+      }
+    ],
+    "procedureOutcome": {
+      "kind": "flaky_test_triage",
+      "classification": "code_issue",
+      "failurePattern": "deterministic",
+      "historySummary": "3 次历史: failed=3, passed=0, infra=0"
+    }
+  },
+  "failureClass": null,
+  "failureReason": null
+}
