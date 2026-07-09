@@ -1,0 +1,79 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "本地 diff 影响 3 个路径,最高风险 high;需重点复核 settings 边界和回归覆盖",
+    "duplicate": {
+      "isDuplicate": false,
+      "reason": "PR 风险评估不直接判定缺陷重复"
+    },
+    "confidence": 0.78,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "modified +86/-31"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/Android.bp",
+        "note": "modified +24/-3"
+      },
+      {
+        "kind": "code_path",
+        "ref": "frameworks/base/services/core/java/com/android/server/wm/ActivityTaskManagerService.java",
+        "note": "modified +14/-10"
+      },
+      {
+        "kind": "log_line",
+        "ref": "diff --git a/packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt b/packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "本地 fixture diff 摘要"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-051",
+        "note": "设置首页 TopLevelSettings 滑动卡顿"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-FWK-004",
+        "note": "应用冷启动偶现 system_server 高负载"
+      }
+    ],
+    "procedureOutcome": {
+      "kind": "pr_risk_triage",
+      "riskAreas": [
+        {
+          "module": "settings",
+          "path": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+          "level": "medium",
+          "reason": "modified +86/-31; owner yangliang2"
+        },
+        {
+          "module": "settings",
+          "path": "packages/apps/Settings/Android.bp",
+          "level": "high",
+          "reason": "modified +24/-3; owner yangliang2"
+        },
+        {
+          "module": "framework",
+          "path": "frameworks/base/services/core/java/com/android/server/wm/ActivityTaskManagerService.java",
+          "level": "high",
+          "reason": "modified +14/-10; owner yangliang2"
+        }
+      ],
+      "suggestedReviewers": [
+        "yangliang2"
+      ],
+      "recommendedTests": [
+        "atest SettingsUnitTests",
+        "atest CtsSettingsTestCases",
+        "atest FrameworksServicesTests"
+      ]
+    }
+  },
+  "failureClass": null,
+  "failureReason": null
+}
