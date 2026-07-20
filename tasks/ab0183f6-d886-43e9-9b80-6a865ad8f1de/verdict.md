@@ -1,0 +1,12 @@
+# 裁决记录
+
+- taskId:ab0183f6-d886-43e9-9b80-6a865ad8f1de
+- defectId:feb69d9a-318d-4081-a519-ce9352e19d56
+- runId:ab0183f6-d886-43e9-9b80-6a865ad8f1de
+- type:adopt_with_edits
+- comment:S9 验收演示:按 owner 表修正后采纳
+
+## 修正差异
+- suspectedRootCause: "TopLevelSettings 在设置首页快速滑动期间于主线程同步刷新 dashboard/SettingsList,单帧耗时 186ms 远超 16ms 帧预算,阻塞 UI 线程导致 Choreographer 连续跳帧掉帧;system-map flow settings_home_jank 命中,次要需复核 vendor ColorSettingsFeatureFlags 缓存与 ActivityThread 主线程阻塞。" -> "SettingsList 刷新状态未收敛,快速滑动时触发 refresh timeout 并阻塞主线程。"
+- duplicate: {"isDuplicate":true,"ofDefectRef":"HIST-SET-001","reason":"症状/关键词/日志与 HIST-SET-001 完全一致(设置首页快速滑动 + SettingsList refresh timeout + 掉帧),且 duplicate-pairs.yaml 已将 HIST-SET-014、HIST-SET-051 同因缺陷归并至 HIST-SET-001。"} -> {"isDuplicate":true,"ofDefectRef":"HIST-SET-001","reason":"与历史设置首页滑动卡顿重复"}
+- evidenceRefs: [{"kind":"log_line","ref":"SettingsList refresh timeout at frame=42 cost=186ms","note":"主线程单帧 186ms,远超 16ms 帧预算"},{"kind":"log_line","ref":"Choreographer skipped 19 frames in SettingsList","note":"明确指向 SettingsList 滑动掉帧,触发 flow.settings_home_jank.escalation 的 Choreographer 条件"},{"kind":"code_path","ref":"packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt","note":"system-map flow settings_home_jank.primary 及 HIST-SET-001 命中路径"},{"kind":"code_path","ref":"packages/apps/Settings/src/com/android/settings/dashboard/DashboardFragment.kt","note":"system-map flow settings_home_jank.primary,dashboard 刷新疑似阻塞点"},{"kind":"similar_defect","ref":"HIST-SET-001","note":"标题与描述完全一致:设置首页滑动卡顿 + SettingsList refresh timeout"},{"kind":"similar_defect","ref":"yangliang2/coloros-seed#3","note":"task.json similarDefects 近同标题同症状缺陷(时间戳相差约 49 秒)"}] -> [{"kind":"code_path","ref":"packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt","note":"命中 Android Settings 顶层列表路径"},{"kind":"similar_defect","ref":"HIST-SET-001","note":"历史重复缺陷"},{"kind":"log_line","ref":"SettingsList refresh timeout","note":"issue 正文日志"}]
