@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "suggestion": null,
+  "failureClass": "crashed",
+  "failureReason": "claude 结果标记为错误:API Error: 400 [1211][模型不存在，请检查模型代码。][20260720184612de44ef0a93d24fda](工作目录已保留:/var/folders/9j/wg17v8pd4m567j4qxxrlkf0967jw4z/T/anp-s9-demo-GrcILg/work/anp-run-81b017d2-40dd-4328-8aa7-a08b8452238e)"
+}
