@@ -1,0 +1,54 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "设置首页 TopLevelSettings 刷新 dashboard 时同步刷新 SettingsList 阻塞主线程,单帧(frame=42)刷新耗时 186ms,远超 16ms 帧预算,导致 Choreographer 连续跳过 19 帧而明显掉帧。根因集中在 packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt 与 DashboardFragment 的列表刷新逻辑;因日志含 Choreographer skipped frames,按 system-map flow settings_home_jank 的 escalation 规则需同步 framework 组复核是否存在主线程/system_server 关联阻塞。",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SET-001",
+      "reason": "与 HIST-SET-001 同标题『设置首页滑动卡顿』、同正文(快速滑动掉帧且日志含 SettingsList refresh timeout)、同模块 settings、同路径 TopLevelSettings.kt、同优先级 P1;且 duplicate-pairs.yaml 中 HIST-SET-014/HIST-SET-051 均以此为 primary,属同一根因的重复缺陷。"
+    },
+    "confidence": 0.97,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "system-map flow settings_home_jank.primary 与 routing-rules/settings 路径命中,owner=settings/yangliang2"
+      },
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/dashboard/DashboardFragment.kt",
+        "note": "settings_home_jank.flow.primary,dashboard 刷新关联路径"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "标题/正文/路径/模块完全一致,duplicate primary"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-014",
+        "note": "设置列表快速滑动掉帧,duplicateOf=HIST-SET-001"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-051",
+        "note": "TopLevelSettings 刷新 dashboard 致 SettingsList refresh timeout,duplicateOf=HIST-SET-001"
+      },
+      {
+        "kind": "log_line",
+        "ref": "SettingsList refresh timeout at frame=42 cost=186ms",
+        "note": "单帧刷新 186ms,主线程阻塞直接证据"
+      },
+      {
+        "kind": "log_line",
+        "ref": "Choreographer skipped 19 frames in SettingsList",
+        "note": "触发 flow escalation『framework 同步复核』"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
