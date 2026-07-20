@@ -1,0 +1,12 @@
+# 裁决记录
+
+- taskId:c4224bee-4bf0-41b0-b30e-81376edd2b93
+- defectId:b5ec057b-f8d6-47c2-a722-106daea95abb
+- runId:c4224bee-4bf0-41b0-b30e-81376edd2b93
+- type:adopt_with_edits
+- comment:S9 验收演示:按 owner 表修正后采纳
+
+## 修正差异
+- suspectedRootCause: "设置首页 TopLevelSettings/DashboardFragment 在快速滑动时于主线程同步刷新 dashboard 数据,导致 SettingsList refresh 单帧耗时 186ms(远超 16ms 帧预算),阻塞 UI 线程触发 Choreographer 丢帧;与历史 HIST-SET-001 同因。因日志含 Choreographer skipped frames,按 system-map settings_home_jank 升级规则建议同步 framework 复核主线程阻塞来源(ActivityThread)。" -> "SettingsList 刷新状态未收敛,快速滑动时触发 refresh timeout 并阻塞主线程。"
+- duplicate: {"isDuplicate":true,"ofDefectRef":"HIST-SET-001","reason":"当前缺陷的标题、描述与关键日志(SettingsList refresh timeout / 快速滑动掉帧)与 HIST-SET-001 完全一致;duplicate-pairs.yaml 已明确将 HIST-SET-014、HIST-SET-051 判定为 HIST-SET-001 的重复,理由均为 SettingsList refresh timeout 致设置首页快速滑动掉帧。"} -> {"isDuplicate":true,"ofDefectRef":"HIST-SET-001","reason":"与历史设置首页滑动卡顿重复"}
+- evidenceRefs: [{"kind":"code_path","ref":"packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt","note":"system-map flow settings_home_jank primary;HIST-SET-001 命中路径;routing-rules settings 模块首条路径"},{"kind":"code_path","ref":"packages/apps/Settings/src/com/android/settings/dashboard/DashboardFragment.kt","note":"system-map flow settings_home_jank primary,dashboard 同步刷新疑似主线程阻塞点"},{"kind":"similar_defect","ref":"HIST-SET-001","note":"标题/正文/日志与当前缺陷完全一致,为该重复簇 primary"},{"kind":"similar_defect","ref":"HIST-SET-014","note":"duplicate-pairs:都是 SettingsList refresh timeout 导致设置首页快速滑动掉帧"},{"kind":"similar_defect","ref":"HIST-SET-051","note":"duplicate-pairs:TopLevelSettings 与 SettingsList refresh timeout 同因"},{"kind":"log_line","ref":"SettingsList refresh timeout at frame=42 cost=186ms","note":"单帧刷新 186ms 远超 16ms 帧预算,主线程被 dashboard 刷新阻塞的直接证据"},{"kind":"log_line","ref":"Choreographer skipped 19 frames in SettingsList","note":"命中 system-map settings_home_jank 升级关键字(Choreographer skipped frames),触发 framework 同步复核"},{"kind":"code_path","ref":"frameworks/base/core/java/android/app/ActivityThread.java","note":"system-map flow settings_home_jank secondary,升级复核候选路径"}] -> [{"kind":"code_path","ref":"packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt","note":"命中 Android Settings 顶层列表路径"},{"kind":"similar_defect","ref":"HIST-SET-001","note":"历史重复缺陷"},{"kind":"log_line","ref":"SettingsList refresh timeout","note":"issue 正文日志"}]
