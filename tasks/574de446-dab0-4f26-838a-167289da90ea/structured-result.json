@@ -1,0 +1,39 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "进入设置首页后，SettingsList 刷新超时导致快速滑动时列表出现明显掉帧与卡顿。",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SET-001",
+      "reason": "当前缺陷与历史缺陷 HIST-SET-001 现象完全一致，均为设置首页快速滑动卡顿掉帧，且日志中同样出现 SettingsList refresh timeout，在 duplicate-pairs.yaml 中也明确指出 HIST-SET-001 与 HIST-SET-014 均为此超时导致的掉帧问题。"
+    },
+    "confidence": 1,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "TopLevelSettings.kt 是设置首页和滑动卡顿的主要关联代码路径，也属于 flow.primary 的定义路径。"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "历史缺陷 HIST-SET-001 记录了相同的设置首页滑动卡顿和 SettingsList refresh timeout 超时日志。"
+      },
+      {
+        "kind": "log_line",
+        "ref": "SettingsList refresh timeout at frame=42 cost=186ms",
+        "note": "缺陷中包含的 SettingsList 刷新超时日志，直接证实了卡顿的根因。"
+      },
+      {
+        "kind": "log_line",
+        "ref": "Choreographer skipped 19 frames in SettingsList",
+        "note": "Choreographer 帧跳跃日志，指明在 SettingsList 中发生了掉帧。"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
