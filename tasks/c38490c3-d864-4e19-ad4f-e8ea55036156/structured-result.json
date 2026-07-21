@@ -1,0 +1,34 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "进入设置首页快速滑动时，SettingsList refresh timeout 触发掉帧卡顿，属于已知核心体验路径卡顿问题。",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SET-001",
+      "reason": "当前缺陷现象（设置首页滑动卡顿、日志中含 SettingsList refresh timeout）与 HIST-SET-001 描述完全一致。根据 .agent/duplicate-pairs.yaml 规则，该类缺陷统一判定重复于 HIST-SET-001（HIST-SET-014 是 HIST-SET-001 的重复件，表明主缺陷为 HIST-SET-001）。"
+    },
+    "confidence": 1,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "TopLevelSettings.kt 是设置首页 flow.primary 路径，也是 HIST-SET-001 关联的代码文件。"
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "历史缺陷 '设置首页滑动卡顿'，其现象与日志特征完全一致。"
+      },
+      {
+        "kind": "log_line",
+        "ref": "SettingsList refresh timeout at frame=42 cost=186ms",
+        "note": "缺陷正文中指明 SettingsList 刷新超时的关键日志，直接命中历史缺陷特征和 flow 规则。"
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
