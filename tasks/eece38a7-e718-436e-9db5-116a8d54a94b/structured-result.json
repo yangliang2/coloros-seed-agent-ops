@@ -1,0 +1,34 @@
+{
+  "status": "succeeded",
+  "suggestion": {
+    "module": "settings",
+    "suggestedOwner": "yangliang2",
+    "priority": "P1",
+    "suspectedRootCause": "SettingsList refresh timeout at frame=42 cost=186ms, resulting in Choreographer skipped frames in TopLevelSettings homepage during fast scrolling.",
+    "duplicate": {
+      "isDuplicate": true,
+      "ofDefectRef": "HIST-SET-001",
+      "reason": "Both setting homepage and settings list jank are caused by SettingsList refresh timeout during rapid scrolling."
+    },
+    "confidence": 0.95,
+    "evidenceRefs": [
+      {
+        "kind": "code_path",
+        "ref": "packages/apps/Settings/src/com/android/settings/homepage/TopLevelSettings.kt",
+        "note": "Primary file path mapped to settings home jank flow and HIST-SET-001."
+      },
+      {
+        "kind": "similar_defect",
+        "ref": "HIST-SET-001",
+        "note": "Historical defect for settings homepage scroll jank with refresh timeout."
+      },
+      {
+        "kind": "log_line",
+        "ref": "SettingsList refresh timeout at frame=42 cost=186ms",
+        "note": "Direct log match with HIST-SET-001 and duplicate pairs pattern."
+      }
+    ]
+  },
+  "failureClass": null,
+  "failureReason": null
+}
