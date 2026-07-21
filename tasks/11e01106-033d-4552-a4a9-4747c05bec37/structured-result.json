@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "suggestion": null,
+  "failureClass": "timeout",
+  "failureReason": "claude 硬超时(120000ms)(工作目录已保留:/var/folders/9j/wg17v8pd4m567j4qxxrlkf0967jw4z/T/anp-s9-demo-umnFqr/work/anp-run-fa4aa2b8-dca4-43c3-954a-10289cff7707)"
+}
